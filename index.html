@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>11.23 Special Day</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Shippori+Mincho:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/*
+VOICE: 静かで上品、ホテルからの招待状。言葉は少なく、余白多め。
+IDEA: 黒い厚紙にシャンパンゴールドの箔押しをした一枚の招待カード。
+PICTURE: 箔押し風の大きな「11.23」と細い二重罫、時刻が大きく垂れ下がるスケジュール。
+COLOUR and TYPE: 黒 #0e0d0b、ベージュ #e9dfcc、シャンパンゴールド #c9a96a。Cormorant Garamond + Shippori Mincho。
+LAYOUT: スマホ縦一列。招待カード→ドレスコード→タイムライン（鍵付きカード）→結び。
+*/
+:root{color-scheme:dark;--bg:#0e0d0b;--card:#16140f;--ink:#efe6d4;--mute:#a99d86;--gold:#c9a96a;--gold2:#e8d3a2;--line:rgba(201,169,106,.32)}
+*{box-sizing:border-box;min-width:0}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.75 "Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif;overflow-x:clip;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(120% 60% at 50% -10%,rgba(201,169,106,.16),transparent 60%),radial-gradient(80% 50% at 50% 110%,rgba(201,169,106,.08),transparent 70%)}
+.en{font-family:"Cormorant Garamond",Georgia,serif}
+.gold{background:linear-gradient(100deg,#a98447 0%,#f0dcab 38%,#c9a96a 55%,#f4e4bd 72%,#a98447 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.wrap{position:relative;max-width:520px;margin:0 auto;padding:max(28px,env(safe-area-inset-top)) 18px 64px}
+.frame{position:relative;border:1px solid var(--line);padding:6px}
+.frame>.inner{border:1px solid var(--line);padding:40px 22px 34px;text-align:center;background:linear-gradient(180deg,rgba(255,255,255,.015),transparent)}
+.corner{position:absolute;width:22px;height:22px;border-color:var(--gold);border-style:solid;opacity:.9}
+.c1{top:-1px;left:-1px;border-width:2px 0 0 2px}.c2{top:-1px;right:-1px;border-width:2px 2px 0 0}.c3{bottom:-1px;left:-1px;border-width:0 0 2px 2px}.c4{bottom:-1px;right:-1px;border-width:0 2px 2px 0}
+
+/* gate */
+#gate{min-height:100vh;display:grid;place-items:center;padding:24px}
+#gate .frame{width:min(420px,100%)}
+#gate h1{margin:10px 0 26px;font:500 clamp(30px,9vw,40px)/1.1 "Cinzel",serif;letter-spacing:.04em}
+.field{display:flex;flex-direction:column;align-items:center;gap:14px}
+.field input{width:100%;height:50px;padding:0 14px;font:18px "Cinzel",serif;letter-spacing:.3em;text-align:center;background:#0b0a08;color:var(--ink);border:1px solid var(--line);border-radius:2px}
+.field input::placeholder{color:#5f5646;letter-spacing:.2em;font-size:14px}
+.field input:focus{outline:2px solid var(--gold);outline-offset:1px}
+.btn{height:46px;min-width:160px;padding:0 28px;border:1px solid var(--gold);background:linear-gradient(180deg,#d8bd85,#b8955a);color:#14110b;font:600 14px "Cinzel",serif;letter-spacing:.2em;border-radius:2px;cursor:pointer}
+.btn:focus-visible{outline:2px solid var(--gold2);outline-offset:2px}
+.err{min-height:22px;margin-top:12px;color:#e3a0a0;font-size:13px}
+
+/* hero */
+.kicker{font-size:13px;color:var(--mute);letter-spacing:.08em}
+.hb{margin:0;font:italic 500 clamp(34px,10vw,46px)/1.1 "Cormorant Garamond",serif;text-wrap:balance}
+.date{display:block;margin:16px 0 0;font:500 clamp(30px,9.4vw,46px)/1.1 "Cinzel",serif;letter-spacing:.04em;user-select:none;-webkit-user-select:none;cursor:default;-webkit-tap-highlight-color:transparent}
+.sd{font:400 15px "Cinzel",serif;letter-spacing:.36em;margin:8px 0 18px;color:var(--gold2)}
+.rule{display:flex;align-items:center;gap:12px;justify-content:center;color:var(--gold);margin:14px 0}
+.rule::before,.rule::after{content:"";height:1px;flex:0 1 70px;background:linear-gradient(90deg,transparent,var(--gold))}
+.rule::after{background:linear-gradient(270deg,transparent,var(--gold))}
+.secret{display:inline-block;padding:6px 16px;border:1px solid var(--line);font-size:15px;letter-spacing:.14em;color:var(--gold2)}
+.lead{margin:18px 0 0;font-size:15px;color:var(--ink)}
+.lead small{display:block;color:var(--mute);font-size:13px;margin-top:4px}
+
+section{margin-top:40px}
+h2{margin:0 0 14px;text-align:center;font-weight:500;font-size:28px;line-height:1.1}
+h2 small{display:block;font:13px "Shippori Mincho",serif;color:var(--mute);margin-top:6px;letter-spacing:.06em}
+
+/* dress */
+.dress{display:grid;gap:10px}
+.dress .row{display:grid;grid-template-columns:72px minmax(0,1fr);gap:12px;padding:14px 16px;background:var(--card);border:1px solid rgba(201,169,106,.18)}
+.dress .lab{color:var(--gold);font-size:14px;padding-top:1px}
+.dress .val{font-size:15px}
+.dress .val span{display:block;color:var(--mute);font-size:13px;line-height:1.6;margin-top:2px}
+
+/* timeline */
+.tl{position:relative;margin:0;padding:0;list-style:none}
+.tl::before{content:"";position:absolute;left:6px;top:24px;bottom:24px;width:1px;background:var(--line)}
+.ev{position:relative;padding:14px 0 14px 30px}
+.ev::after{content:"";position:absolute;left:2px;top:25px;width:9px;height:9px;transform:rotate(45deg);background:var(--bg);border:1px solid var(--gold)}
+.what h3{margin:0;font-weight:500;font-size:17px;line-height:1.6;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.t{font:500 18px/1 "Cinzel",serif;color:var(--gold2);white-space:nowrap;letter-spacing:.02em}
+.what p{margin:2px 0 0;color:var(--mute);font-size:13px}
+
+.lock{margin-top:10px;border:1px solid var(--line);background:var(--card);border-radius:2px;overflow:hidden}
+.lock>button{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:12px;width:100%;min-height:56px;padding:12px 14px;cursor:pointer}
+.lock>button:focus-visible{outline:2px solid var(--gold);outline-offset:-2px}
+.lock .ic{flex:none;width:34px;height:34px;display:grid;place-items:center;border:1px solid var(--line);border-radius:50%;color:var(--gold)}
+.lock .ic svg{width:16px;height:16px}
+.lock .tx{flex:1;line-height:1.45}
+.lock .tx b{display:block;font-weight:500;font-size:15px}
+.lock .tx span{font-size:12px;color:var(--mute)}
+.lock .cd{font:500 13px "Cinzel",serif;color:var(--gold2);white-space:nowrap;letter-spacing:.04em}
+.lock .chev{flex:none;color:var(--gold);transition:transform .3s}
+.lock.locked>button{cursor:not-allowed}
+.lock.locked .tx b{letter-spacing:.3em}
+.lock.open .chev{transform:rotate(180deg)}
+.lock.fresh{animation:glow 2.4s ease-out 2}
+@keyframes glow{0%{box-shadow:0 0 0 0 rgba(232,211,162,.55)}100%{box-shadow:0 0 0 14px rgba(232,211,162,0)}}
+.body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s ease}
+.lock.open .body{grid-template-rows:1fr}
+.body>div{overflow:hidden}
+.detail{padding:4px 16px 18px;border-top:1px solid rgba(201,169,106,.18)}
+.shop{text-align:center;padding:16px 0 6px}
+.shop .nm{font-size:26px;line-height:1.2;font-weight:500}
+.shop .place{font-size:13px;color:var(--mute);margin-top:6px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:12px 0 4px}
+.tags span{font-size:12px;border:1px solid var(--line);padding:2px 10px;color:var(--gold2);white-space:nowrap}
+.mh{margin:18px 0 6px;font:600 14px "Cormorant Garamond",serif;letter-spacing:.14em;color:var(--gold);text-align:center}
+.mh small{display:block;font:12px "Shippori Mincho",serif;letter-spacing:.04em;color:var(--mute)}
+.menu{list-style:none;margin:0;padding:0}
+.menu li{display:flex;gap:10px;justify-content:space-between;padding:7px 0;border-bottom:1px dotted rgba(201,169,106,.22);font-size:14px;line-height:1.55}
+.menu li:last-child{border-bottom:0}
+.menu li em{flex:none;align-self:center;font-style:normal;color:var(--gold);font-size:12px;line-height:1}
+.note{margin-top:14px;font-size:12px;color:var(--mute);text-align:center}
+
+.foot{margin-top:48px;text-align:center}
+.foot p{margin:0;color:var(--mute);font-size:13px}
+.foot .sig{margin-top:10px;font:italic 26px "Cormorant Garamond",serif}
+
+/* preview switch */
+#pv{position:fixed;left:50%;bottom:max(14px,env(safe-area-inset-bottom));transform:translateX(-50%);display:none;align-items:center;gap:10px;padding:8px 10px 8px 14px;background:#1d1a13;border:1px solid var(--gold);font-size:12px;color:var(--gold2);z-index:10;box-shadow:0 8px 28px rgba(0,0,0,.5)}
+#pv.on{display:flex}
+#pv button{height:32px;padding:0 10px;font:12px "Shippori Mincho",serif;background:transparent;color:var(--ink);border:1px solid var(--line);cursor:pointer}
+.toast{position:fixed;left:50%;top:18px;transform:translate(-50%,-30px);opacity:0;padding:8px 16px;background:#1d1a13;border:1px solid var(--line);font-size:13px;transition:.35s;z-index:11;pointer-events:none}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.hidden{display:none!important}
+#app{opacity:0;transition:opacity .8s}
+#app.in{opacity:1}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<div id="gate">
+  <div class="frame"><i class="corner c1"></i><i class="corner c2"></i><i class="corner c3"></i><i class="corner c4"></i>
+    <div class="inner">
+      <div class="kicker" style="font-family:Cinzel,serif;letter-spacing:.24em;font-size:12px">SECRET INVITATION</div>
+      <h1 class="gold">2026.11.23</h1>
+      <form id="gf" autocomplete="off">
+        <div class="field"><input id="pw" type="password" aria-label="Password" placeholder="PASSWORD" autocomplete="current-password"><button class="btn" type="submit">OPEN</button></div>
+        <div class="err" id="err" role="alert"></div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div id="app" class="hidden">
+  <div class="wrap">
+    <div class="frame"><i class="corner c1"></i><i class="corner c2"></i><i class="corner c3"></i><i class="corner c4"></i>
+      <div class="inner">
+        <h1 class="hb gold">Happy Birthday,<br>Sayaka</h1>
+        <span class="date gold" id="title">2026.11.23</span>
+        <div class="sd">SPECIAL DAY</div>
+        <div class="secret" style="font-family:Cinzel,serif;font-size:12px;letter-spacing:.24em">SECRET INVITATION</div>
+        <div class="rule en">✦</div>
+        <p class="lead">お店は当日までシークレット。<small>どちらも、少し落ち着いた雰囲気のお店です。</small></p>
+      </div>
+    </div>
+
+    <section>
+      <h2 class="en gold">Dress Code<small>服装と持ち物のご案内</small></h2>
+      <div class="dress" id="dress"></div>
+    </section>
+
+    <section>
+      <h2 class="en gold">Schedule<small>当日のスケジュール</small></h2>
+      <ol class="tl" id="tl"></ol>
+    </section>
+
+    <div class="foot">
+      <div class="rule en">✦</div>
+      <p>素敵な一日になりますように。</p>
+      <div class="sig gold">with love</div>
+    </div>
+  </div>
+</div>
+
+<div id="pv" role="status"><span>プレビュー：全解禁中</span><button type="button" id="pvoff">解除する</button></div>
+<div class="toast" id="toast"></div>
+
+<script>
+{
+const ENC = {"salt":"a2t8iiowdbuNlxq9cbJ+eQ==","iv":"13Wd0w7D5zDSpN+M","iter":150000,"data":"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"};
+
+/* ===== 解禁時刻（JST） ===== */
+const UNLOCK = {
+  lunch:  "2026-11-23T11:00:00+09:00",
+  dinner: "2026-11-23T16:30:00+09:00"
+};
+
+const $ = s => document.querySelector(s);
+const KEY = "inv1123.pw";
+let DATA = null, preview = false;
+const at = k => new Date(UNLOCK[k]).getTime();
+const jst = new Intl.DateTimeFormat("ja-JP",{timeZone:"Asia/Tokyo",month:"numeric",day:"numeric",hour:"2-digit",minute:"2-digit",hour12:false});
+const label = k => { const p = Object.fromEntries(jst.formatToParts(new Date(at(k))).map(x=>[x.type,x.value])); return `${p.month}月${p.day}日 ${p.hour}:${p.minute} 解禁`; };
+const b64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
+
+async function decrypt(pw){
+  const base = await crypto.subtle.importKey("raw", new TextEncoder().encode(pw), "PBKDF2", false, ["deriveKey"]);
+  const key = await crypto.subtle.deriveKey({name:"PBKDF2", salt:b64(ENC.salt), iterations:ENC.iter, hash:"SHA-256"}, base, {name:"AES-GCM", length:256}, false, ["decrypt"]);
+  const buf = await crypto.subtle.decrypt({name:"AES-GCM", iv:b64(ENC.iv)}, key, b64(ENC.data));
+  return JSON.parse(new TextDecoder().decode(buf));
+}
+
+const lockSvg = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="11" width="14" height="10" rx="1.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>`;
+const openSvg = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="11" width="14" height="10" rx="1.5"/><path d="M8 11V8a4 4 0 0 1 7.6-1.8"/></svg>`;
+const chev = `<svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m6 9 6 6 6-6"/></svg>`;
+
+function detailHTML(d){
+  return `<div class="detail">
+    <div class="shop"><div class="nm gold">${d.name}</div><div class="place">${d.place}</div></div>
+    <div class="tags">${d.tags.map(t=>`<span>${t}</span>`).join("")}</div>
+    ${d.sections.map(s=>`<div class="mh">${s.en}<small>${s.ja}</small></div>
+      <ul class="menu">${s.items.map(i=>{const [n,p]=[].concat(i);return `<li><span>${n}</span>${p?`<em>${p}</em>`:""}</li>`}).join("")}</ul>`).join("")}
+    ${d.note?`<p class="note">${d.note}</p>`:""}
+  </div>`;
+}
+
+function render(){
+  $("#dress").innerHTML = DATA.dress.map(r=>`<div class="row"><div class="lab">${r[0]}</div><div class="val">${r[1]}<span>${r[2]}</span></div></div>`).join("");
+  $("#tl").innerHTML = DATA.schedule.map(e=>`<li class="ev"><div class="what"><h3><span class="t">${e.t}</span><span>${e.h}</span></h3>${e.p?`<p>${e.p}</p>`:""}
+    ${e.lock?`<div class="lock locked" data-k="${e.lock}"><button type="button" aria-expanded="false">
+      <span class="ic">${lockSvg}</span><span class="tx"><b>？？？</b><span class="lb">${label(e.lock)}</span></span><span class="cd"></span>${chev}</button>
+      <div class="body"><div></div></div></div>`:""}</div></li>`).join("");
+  document.querySelectorAll(".lock").forEach(el=>{
+    el.querySelector("button").addEventListener("click",()=>{
+      if(el.classList.contains("locked")){ toast(`まだ秘密です（${label(el.dataset.k)}）`); return; }
+      const o = el.classList.toggle("open");
+      el.querySelector("button").setAttribute("aria-expanded", o);
+    });
+  });
+  tick();
+}
+
+function fmt(ms){ const s=Math.ceil(ms/1000), d=Math.floor(s/86400), h=Math.floor(s%86400/3600), m=Math.floor(s%3600/60), x=s%60;
+  const hh=String(h).padStart(2,"0"), mm=String(m).padStart(2,"0"), ss=String(x).padStart(2,"0");
+  return d>0 ? `あと${d}日 ${hh}:${mm}` : `${hh}:${mm}:${ss}`; }
+
+function tick(){
+  const now = Date.now();
+  document.querySelectorAll(".lock").forEach(el=>{
+    const k = el.dataset.k, d = DATA[k], open = preview || now >= at(k);
+    const wasLocked = el.classList.contains("locked");
+    if(open && wasLocked){
+      el.classList.remove("locked");
+      el.querySelector(".ic").innerHTML = openSvg;
+      el.querySelector(".tx b").textContent = d.name;
+      el.querySelector(".lb").textContent = "タップしてメニューを見る";
+      el.querySelector(".cd").textContent = "";
+      el.querySelector(".body>div").innerHTML = detailHTML(d);
+      if(el.dataset.ready){ el.classList.add("fresh"); if(!preview) toast(`${k==="lunch"?"ランチ":"ディナー"}が解禁されました`); }
+    } else if(!open && !wasLocked){
+      el.classList.add("locked"); el.classList.remove("open","fresh");
+      el.querySelector(".ic").innerHTML = lockSvg;
+      el.querySelector(".tx b").textContent = "？？？";
+      el.querySelector(".lb").textContent = label(k);
+      el.querySelector(".body>div").innerHTML = "";
+    }
+    if(!open) el.querySelector(".cd").textContent = fmt(at(k)-now);
+    el.dataset.ready = 1;
+  });
+}
+
+let tt;
+function toast(m){ const t=$("#toast"); t.textContent=m; t.classList.add("show"); clearTimeout(tt); tt=setTimeout(()=>t.classList.remove("show"),2200); }
+
+/* プレビュー用強制解除：タイトル「11.23」を3秒以内に5回タップ */
+let taps=[];
+function setPreview(v){ preview=v; $("#pv").classList.toggle("on",v); tick(); toast(v?"プレビュー：全解禁":"プレビュー解除"); }
+
+async function open(pw, silent){
+  try{
+    DATA = await decrypt(pw);
+  }catch(e){
+    if(!silent) $("#err").textContent = (window.crypto&&crypto.subtle) ? "パスワードが違います" : "このブラウザでは開けません";
+    return;
+  }
+  try{ localStorage.setItem(KEY, pw); }catch(e){}
+  $("#gate").classList.add("hidden");
+  $("#app").classList.remove("hidden");
+  requestAnimationFrame(()=>$("#app").classList.add("in"));
+  render();
+  setInterval(tick, 1000);
+  $("#title").addEventListener("click",()=>{
+    const n=Date.now(); taps=taps.filter(x=>n-x<3000); taps.push(n);
+    if(taps.length>=5){ taps=[]; setPreview(!preview); }
+  });
+  $("#pvoff").addEventListener("click",()=>setPreview(false));
+}
+
+$("#gf").addEventListener("submit", e=>{ e.preventDefault(); $("#err").textContent=""; open($("#pw").value.trim()); });
+let saved=null; try{ saved=localStorage.getItem(KEY); }catch(e){}
+if(saved) open(saved, true);
+}
+</script>
+</body>
+</html>
